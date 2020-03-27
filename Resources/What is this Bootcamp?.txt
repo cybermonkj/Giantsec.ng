@@ -1,0 +1,11 @@
+This Bootcamp is useful if you are starting your cybersecurity career,
+seeking your​ Certified Ethical Hacker​(CEH)
+Offensive Security Certified Professional (OSCP) Certification​ , or​ CompTIA PenTest+​ certifications; or just interested in learning more about cyber security. The six days bootcamp is a great place to start. it is a comprehensive Ethical
+Hacking (security penetration testing) hands-on bootcamp. you will get the training and experience you need to
+successfully launch your ethical hacking career. You will participate in live discussions, demos, whiteboard instruction and lab exercises. No prior experience is needed. but a small understanding of basic networking and programing might help. 
+
+This course provides step-by-step
+real-life scenarios. You will see first-hand how an ethical hacker
+performs initial reconnaissance of a victim and how to assess systems
+and network security controls security posture. This Bootcamp includes
+live discussions, whiteboard instruction, projected Discussions and a Capture the flag game and an optional Post bootcamp training

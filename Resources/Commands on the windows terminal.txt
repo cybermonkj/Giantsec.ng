@@ -1,0 +1,274 @@
+In order to launch Win 10 Command Prompt, click on the Windows menu, then go in the Windows System folder and open Command Prompt. Please note that if you run the Command Prompt without administration rights, all Windows CMD commands typed inside it will be without rights as well. That’s nice to avoid problems while learning.
+
+Let’s start by displaying text with echo:
+
+1
+echo Hello World!
+This will display the text in the console. Congratulations on your first command! Displaying things is very helpful in scripts and in loops, in order to show helpful comments on what is going on or simply to indicate progress.
+
+In order to display two lines, you can use & command like this
+
+1
+echo Hello World! & echo Hello Again!
+The & operator allows executing two commands in one line. It’s useful in commands you directly type. That is important especially if something must launch quickly after another task.
+
+In the command line, you often work with files. You may want to know what are current files in the folder you’re in. Right, you can use the Windows Explorer too in another window but when you just can’t, the Windows Command Prompt list directory method is the way to go. Also, you can ignore or show hidden files more easily.
+So:
+
+1
+dir
+Now, you may be looking for a specific file. You have a starting point but you don’t know the exact folder. In dir you can show all files in current directories, but also files in subdirectories in one command:
+
+1
+dir /S
+But when you know a little more about dir command, let’s learn a bit more. Dir command also allows you to do searches. It has a way different behavior than Windows Explorer search but it’s useful. Let’s say you need to find a file with the word SQL in the filename:
+
+1
+dir /S *sql*
+Please note that if you search the word put, it will match also the filenames like input or output because both words contain put. The search is case-insensitive by default because Windows generally ignoring cases when it’s about files and directories.
+
+Now you may want to display content of a file using the type command. Don’t do so with too big files because your Command Prompt will be filled out with too many lines. But it is still useful for relatively small files like configurations.
+
+type "filename"
+That’s the right time to tell you something you should do in all Command Prompt commands: always put double quotes (like this: “filename.txt”) around all filenames. Yes, it’s tempting to skip few keystrokes but if you speak double quotes around filenames or folders then it may cause you a serious problem someday. You don’t want to have your filename interpreted as a shell command that can happen if your filename or folder name suddenly using spaces inside.
+
+But what to do when that file is just too long to fit on the screen? A single command isn’t enough, that’s why I need to show you how to combine commands.
+
+
+Make CMD commands more powerful: pipes and tips
+When some command outputs too much content to fit on the screen, you will need to use the more command. This is one of the simple CMD commands that you will need in many circumstances since the Command Prompt on Windows 10 can’t contain much text. more command works like this: it prints one screen of text and you press the spacebar to show the next screen of text until you’ve read it all.
+
+However, unlike other commands we’ve seen so far, the more command takes the text as input. A lot of text. So you need to redirect the text from type command to move, otherwise, it won’t work out. You can do so using the pipe | operator. One the left side of pipe |, you put a command to produce output. On the right side, you write a command that will receive the output and do something with it. So for example when trying to look at a long text file:
+
+1
+type "filename" | more
+We use this technique here with type and more, but it can work in other cases too. For example, you may combine more with help command to display the documentation page by page:
+
+1
+help | more
+Note that if you no longer need to show the next screen and you want to leave more command, just press the Q key on your keyboard. You can also press an equal sign “=” to display the current line number. And even better: you can skip a few lines at the beginning of the output. Example when you want to list a directory but you don’t want to see the header and you want to skip first 7 lines:
+
+1
+dir | more +7
+The “+7” means seven lines you want to skip. By the way, you don’t need to use type to display a file using more. It supports directly file display by putting the filename at the end of the command:
+
+1
+more "filename"
+It has an added benefit: more command tells your current viewing position in the file with a percentage of the progress. In general, if you have some command that also provides additional feature it is better to use this command and its feature instead of two separate commands. You will often find benefits of using commands with additional parameters because it makes the script shorter.
+
+But the best views of the world don’t replace a good text editor. Sometimes you really want to have the output of command inside a new file instead. Good news: there’s another cmd.exe command for that and it is represented by the simple “>” symbol (without quotes). You can use it like this:
+
+1
+tree /F > "files.txt"
+You may think of it showing the direction of the output: take everything from the console and save it into “files.txt” filename.
+
+As you can see, first the command is written normally, as you would if you wanted to see the result in that dark Windows 10 Command Prompt console window. Then you have “the greater than” symbol > operator and after that operator, we have the output filename where the output from the console will be direct to instead of the visible window. Much like when you do “File > Save” in an application, you will generally put the name of a new, non-existent file. Well, if you really want, you can put the name of an existing file. Be careful though, this operator will replace the actually existing file, effectively deleting all its contents, much like with “File > Save”.
+
+Even better, there’s a second operator that is represented by double greater than “>>” symbols. Instead of writing into a file and erasing the content, this one can use the existing file and write the output at the end of this existing file. This is really convenient when you need to compare multiple commands output but also you can literally write files with echo commands used in the Command Prompt, much like this:
+
+1
+2
+3
+echo "Hello World" > "Command log.txt"
+copy "Big Archive.zip" "Backup Big Archive.zip"
+echo "Copy Was successful" > "Command log.txt"
+Using >> command is also a good and practical way to concatenate two existing text files. Yes, using the double greater than operator and type program, you can suddenly concatenate two files. Combining good features from different programs is an important aspect of the command line scripts. Type command alone might not look useful, but that’s for this kind of combination that it exists. So for example, concatenating files is useful to combine your monthly reports in CSV:
+
+1
+2
+type "September report.csv" >> "Combined report.csv"
+type "October report.csv" >> "Combined report.csv"
+Note that you need to use “double greater than“ >> operator to add the content into an existing file. If you use > (single “greater than“) then it will overwrite any existing file content or will create a new file.
+
+There’s a bonus: all cmd prompt commands support these two operators: “>” and “>>” !
+
+
+Chaining Windows CMD commands safely
+Now, we’ve seen earlier how to chain two commands with & operator. The thing is that, when you chain two commands, it’s usually because they’re related and you only want to execute the second one command only if the first one worked out.
+
+For example, you want to create a new directory and copy a file in this new directory. Now, if the directory creation failed somehow, are you really sure you want to continue and copy that file? The copy might fail in the cascade because the directory doesn’t exist because of the previous error as the directory creation may have failed because the folder already existed and so coping new file may also erase an existing file you didn’t intend to. That’s exactly where you start to wonder if you really want to run that copy command without checking.
+
+By using the double ampersand && operator, the second command will execute only if the first one worked correctly. Here’s an example with creating a  new directory and then copying a file:
+
+1
+mkdir "v2" && copy "index.html" "v2"
+If you run this command once, assuming you have an index.html file already, you will get a new directory. In this directory, there will be a copy of the index.html file. However, if you delete the index.html file in the new v2 directory via Windows Explorer and then you run the command chain again, you will see that index.html doesn’t get copied. That proofs that the && operator works out and didn’t run the “copy” command because mkdir command failed.
+
+But how does it know that? There’s a thing called exit code. When an application exits, it always returns an exit code to the operating system in order to indicate if all gone right or not. This way various apps can launch other applications and have a simple way to know how the task launched finished its job. Generally, an exit code of 0 (zero) is considered as “everything went fine!”. If the application returns something that is not a zero, a parent app understands the application had an error. Also, the non-zero number is the error code returned and can explain the reason.
+
+Exit code is the basic Windows commands concept or even, we can say a core concept. Hence why it’s integrated straight in the syntax of CMD line commands. Exit codes aren’t just dark numbers that are only accessible to Windows command line operators. The exit code of the last command is always stored in the global  %ERRORLEVEL% command variable that any app can read.
+
+In the command line, we often want to extract data and sometimes we need only one line or just one special file. It may be simpler for you to tell the computer to find a specific date in your log file instead of scrolling through yourself and looking for it. That’s the purpose of the find command. It searches a string in a text and outputs any line that contains that search string to allow easy filtering. Let’s get back to the log file filter example, the command would look like this:
+
+1
+find "[07/Oct" "Connections Log.txt"
+See how it helps to see more clearly what’s happening? But find does not only work with files! Thanks to the so-called “pipe” operator represented by “|” symbol (no quotes). find operator combined with | operator can be to filter lines you really want to look for, such as your IP address using ipconfig, which is one of the Windows System commands:
+
+1
+ipconfig | find "IPv"
+See how it’s convenient? Instead of a whole screen, you get only a few lines with exactly what you want. Maybe you would want to keep it in Windows 10 Command Prompt list!
+
+
+Take a look at a few more Windows Prompt commands:
+
+
+1. Deltree command
+This is one of the most important commands prompt Windows commands. It is a short form of delete tree. Deltree is a command utilized to delete files and directories forever from the computer or laptop. It is an external command that is accessible in the Microsoft operating systems.
+
+Syntax:
+
+This command removes a directory and all the subdirectories and files in it.
+
+To delete more than one files and directories the syntax is as shown below:
+
+DELTREE [/Y] [drive:]path [[drive:]path[…]]
+
+Where
+
+/Y: Crushes assisting to validate if the user wants to delete the subdirectory.
+
+[drive:]path: This defines the name of the directory user wants to remove.
+
+Example:
+
+deltree c:\MyFile
+
+When the user fires the above command in the Command Prompt Windows 10 then it deletes the MyFile directory and everything present in that directory.
+
+
+2. Driverquery
+This is one of the most important Windows commands. Wrong device drivers can point to any quantity of system dilemmas. If users want to view which drivers are placed on a Windows operating system, they can achieve this by executing the driver query Windows command-line tool. This command comes under basic CMD prompt commands which gives data about each driver that is being utilized.
+
+The command is:
+
+driverquery
+
+If a user wants a bit extra report, you can affix the -v switch. Another alternative is to affix the -si switch, which makes the tool to demonstrate signature data for the drivers. Here’s how they seem:
+
+driverquery -v
+
+driverquery -si
+
+
+3. Ping
+Ping is presumably the easiest of all distinguishing Command Prompt Windows 10 commands. It is utilized to check fundamental TCP/IP connectivity to a web host. To apply it, just enter the command, accompanied by the alias or IP address of the host you need to examine.
+
+For example:
+
+ping 192.168.1.1
+
+Always remember that this command will operate only if the Internet Control Message Protocol (ICMP) movement is permitted to move between the two computers. If at any time a firewall is preventing ICMP traffic, the ping will break.
+
+
+4. Pathping CMD command
+Ping does an excellent duty of informing users whether two computers can interact with each other over TCP/IP, but if ping does break then users will not give any data regarding the characteristics of the collapse. This is where the Windows Command Prompt commands like pathping are handy. The command is given below:
+
+pathping 192.168.1.1
+
+Pathping is intended for circumstances in which one or more routers live between hosts. It conveys a sequence of packets to each router that’s on the route to the target host in an attempt to discover whether the router is operating moderately or filtering packets. At its purest, the syntax for pathping is the same as that of the ping command.
+
+
+5. Tasklist
+This is one of the best Windows Command Prompt codes. The tasklist command is created to give data about the tasks that are operating on a Windows operating system. Users can put the following command:
+
+tasklist
+
+The tasklist command has many arbitrary switches. The -m switch, which makes the tasklist to illustrate all the DLL modules connected with a job. The next is the -svc switch, which places the settings that back each job. Here’s how they work:
+
+tasklist -m
+
+tasklist -svc
+
+
+6. Taskkill
+This is one of the basic CMD commands. The taskkill command eliminates a task, either by title or by process ID. The arrangement for this command is manageable. Users must fire the taskkill command with -pid (process ID) or -im (image name) and the title or process ID of the job that they need to stop. Here are two samples of how this command operates:
+
+taskkill -pid 3125
+
+taskkill -im chrome.exe
+
+
+7. System File Checker
+One can say that this command comes under the most important Windows commands. Wicked apps will regularly strive to substitute kernel system files with altered variants in an attempt to gain control of the system. The System File Checker can be utilized to check the probity of the Windows system registers. If any of the folders are discovered to be lost or nefarious, they will be repaired. Users can execute the System File Checker by utilizing this command:
+
+sfc /scannow
+
+The sfc /scannow command examines all secured system files, and substitute damaged files with a cached model that is placed in a compressed enclosure at %WinDir%\System32\dllcache.
+
+
+8. Repair-bde Windows command
+This is one of the most amazing Windows command line commands. If a drive that is secured is facing some problems then users can seldom retrieve the data utilizing a service named repair-bde. To apply this command, users require a target drive to which the retrieved data can be recorded, as well as the BitLocker retrieval key or restoration password. The primary syntax for this command is:
+
+repair-bde <root> <target> -rk | rp <root>
+
+Users should define the root drive, the target drive, and both the rk (recovery key) or the rp (recovery password) switch, along with the route to the restoration key or the restoration password. Following is the example:
+
+repair-bde c: d: -rk e:\restore.bek
+
+
+9. NetDiag
+Conceivably the most valuable of the CMD prompt commands that are developed into Windows is NetDiag. The NetDiag command is outlined to operate a series of analyses on the computer in order to assist the professional sketch out why the computer is encountering networking difficulties. The command is shown below:
+
+Netdiag
+
+Listing the NetDiag command by itself will make all of the possible analyses to be covered. Netdiag can assist users to interpret any amount of network problems such as Monitoring Virtual Private Networks.
+
+
+10. Tracert CMD command
+The tracert command tracks the path it exercises for a packet to touch a target and displays users an erudition about each jaunt along that path. For example, if users run tracert abc.com, they’ll notice information about each link the packet communicates with on its route to touch the server. If users are having concerns comparing to a website, tracert can explicate where the enigma is transpiring.
+
+tracert  abc.com
+
+The above command is one of the most crucial Command Prompt Windows 10 commands.
+
+11. CIPHER
+The cipher comes under the encryption Windows Command Prompt Commands. This reveals or changes the encryption of records and files on NTFS volumes. If employed without parameters, cipher reveals the encryption status of the prevailing directory and any records it holds. For example, the following command enables the encryption of the Private directory.
+
+cipher /e private
+
+12. Finger
+The Command Prompt Windows 10 also has one important command known as finger. It displays information about a user or users on a particular remote computer. For example,
+
+finger user1@users.abc.com
+
+13. Comp
+This Windows Command Line command is used to compare the contents of two files byte-by-byte. If applied without parameters, it allows users to enter the files to compare. For example,
+
+comp c:\annualreports \\sales\myfile\march
+
+14. Clip
+The clip comes under the redirecting Windows Commands. It redirects command output from the command line. Users can also paste the output into other programs and files. For example,
+
+clip < myfile.txt
+
+15. Color
+The color is one of the featuring CMD Prompt Commands. It develops the font and background colors in the Command Prompt pane for the running session. If applied without parameters, color alters the default view and setting colors. For example,
+
+color 84
+
+16. Append
+The append comes under the directories Command Prompt Commands Windows 10. This allows programs to open files in particular folders or directories. If applied without parameters, the append command reveals the appended directory index. For example,
+
+append /e
+
+The above command will store a copy of the appended directory list.
+
+17. Getmac
+The getmac command comes under the most important Windows CMD Commands. This command gives the media access control (MAC) address. It also gives the record of network rules connected with each address for all network cards locally or over a network. getmac can be beneficial if you want to use the MAC address into a network analyzer or when you want to understand what rules are running on a specific network adapter. For example,
+
+getmac /fo table /nh /v
+
+18. Label
+The label commands are basic CMD Line Commands. It forms, switches, or removes the name of a disk. If applied without parameters, the label command modifies the prevailing volume label or eliminates the current label. An NTFS volume label is 32 characters in length. It can retain and disclose the fact that was applied when the label was formed. For example,
+
+label a:reports-december
+
+19. Logman
+The logman commands are used in windows server Command Prompt Windows 10. The logman command builds and maintains Performance logs and Event Trace Session. This command also backs many roles of Performance Monitor from the command line. For example,
+
+logman query "perf_log"
+
+20. Ftype
+The ftype commands are Windows System Commands. It represents or changes filetypes that are applied in file name extension assistance. If applied without an operator(=), ftype shows the prevailing open command string for the designated filetype. If applied without parameters, ftype shows the filetypes that have open strings specified. For example,
+
+ftype txtfile

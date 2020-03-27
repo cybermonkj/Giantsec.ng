@@ -1,0 +1,122 @@
+This Bootcamp is useful you are starting your cybersecurity career,
+seeking your​ Certified Ethical Hacker​(CEH)
+Offensive Security Certified Professional (OSCP) Certification​ , or​ CompTIA PenTest+​ certifications; or just interested in learning more about cyber security. The six days bootcamp is a great place to start. it is a comprehensive Ethical
+Hacking (security penetration testing) hands-on bootcamp. you will get the training and experience you need to
+successfully launch your ethical hacking career. You will participate in live discussions, demos, whiteboard instruction and lab exercises. No prior experience is needed. but a small understanding of basic networking and programing might help. 
+
+This course provides step-by-step
+real-life scenarios. You will see first-hand how an ethical hacker
+performs initial reconnaissance of a victim and how to assess systems
+and network security controls security posture. This Bootcamp includes
+live discussions, whiteboard instruction, projected Discussions and a Capture the flag game
+
+
+
+
+Helpful Resources Prior to Taking the Live Training:
+● Security Penetration Testing The Art of Hacking Series LiveLessons​ (video)   https://www.safaribooksonline.com/library/view/security-penetration-testing/9780134833989/
+● Wireless Networks, IoT, and Mobile Devices Hacking​ (video)   https://www.safaribooksonline.com/library/view/wireless-networks-iot/9780134854632
+● Enterprise Penetration Testing and Continuous Monitoring​ (video) https://www.safaribooksonline.com/library/view/enterprise-penetration-testing/9780134854779/
+● Hacking Web Applications​ (video) https://www.safaribooksonline.com/videos/hacking-web-applications/9780135261422
+● Security Fundamentals​ (video)  https://www.safaribooksonline.com/library/view/ccna-cyber-ops/9780134646794/
+
+
+
+
+
+
+Helpful Resources Prior to Taking the Live Training:
+● Security Penetration Testing The Art of Hacking Series LiveLessons​ (video)   https://www.safaribooksonline.com/library/view/security-penetration-testing/9780134833989/
+● Wireless Networks, IoT, and Mobile Devices Hacking​ (video)   https://www.safaribooksonline.com/library/view/wireless-networks-iot/9780134854632
+● Enterprise Penetration Testing and Continuous Monitoring​ (video) https://www.safaribooksonline.com/library/view/enterprise-penetration-testing/9780134854779/
+● Hacking Web Applications​ (video) https://www.safaribooksonline.com/videos/hacking-web-applications/9780135261422
+● Security Fundamentals​ (video)  https://www.safaribooksonline.com/library/view/ccna-cyber-ops/9780134646794/
+
+
+
+
+
+
+
+
+Lab Setup
+
+You can build your own lab as elaborate as you would like. However,
+for the purpose of this class, the following virtual machines (VMs)
+will be used.
+● WebSploit:​ Kali + Additional Tools + Vulnerable Applications in Docker containers...
+● Raven​ : A vulnerable VM that you will use to perform a full assessment (from reconnaissance to full compromise).
+● VTCSEC:​ A second vulnerable VM that you will use to perform a full assessment (from reconnaissance to full compromise)
+
+
+
+Deploying Your Virtual Machines
+You can deploy and configure your VMs using ​ Virtual Box​ , ​ VMWare
+Workstation Player​ , ​ VMWare Workstation Pro​ (Windows), ​ VMWare Fusion
+(Mac), or ​ vSphere Hypervisor​ (free ESXi server).
+You should create a VM-only network (as shown in the previous figure)
+to deploy your vulnerable VMs and perform several of the attacks using
+WebSploit (Kali Linux).
+You can configure a separate network interface in your WebSploit VM to
+connect to the rest of your network and subsequently the Internet.
+Penetration Testing Linux Distributions
+Several Linux distributions package numerous penetration testing
+tools. The purpose of these Linux distributions is to make it easier
+for individuals to get started with penetration testing, without
+having to worry about software dependencies and compatibility issues
+that could be introduced when installing and deploying such tools. The
+following are the most popular penetration testing Linux
+distributions:
+Kali Linux
+You can download Kali Linux from ​ https://www.kali.org​ . Offensive
+Security released a free open source book and course about how to
+install, customize, and use Kali Linux. The book and the course can be
+accessed at ​ https://kali.training​ .
+Parrot Security OS
+You can download Parrot from ​ https://www.parrotsec.org​ and access the
+documentation at ​ https://docs.parrotsec.org​ .
+
+
+
+Black Arch
+You can download BlackArch Linux from ​ https://blackarch.org​ and access
+the documentation at ​ https://blackarch.org/guide.html​ . BlackArch Linux
+source code can be accessed at ​ https://github.com/BlackArch/blackarch​ .
+
+
+
+
+
+
+
+
+
+Exercise 1.0: Kali Linux/Parrot OS Top Post Install Customizations and Tips
+
+As per the instructions from Offensive Security ​ here​ , “VMware ​ recommends​ using the
+distribution-specific open-vm-tools (OVT) instead of the VMware Tools package for guest
+machines. To install open-vm-tools in Kali, first make sure you are fully updated, and then enter
+the following:”
+apt update && apt -y full-upgrade
+#​ Reboot now ​ in​ ​ case​ you have updated to a new kernel. Once rebooted:
+apt -y --reinstall install open-vm-tools-desktop fuse
+reboot
+(Optional) You can refer to the instructions ​ here​ , for adding support for Shared Folders when
+using OVT.
+Refer to the following link for additional post install tips including:
+https://www.offensive-security.com/kali-linux/top-10-post-install-tips
+● enabling or disabling the Intelligent Sidebar option
+● adding your SSH public key
+● installing the NVIDIA drivers if you need them
+● disabling the Screen Lock Gnome feature
+● adding a non-root User if you’re not comfortable running as root
+● keeping the Kali system up to date
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,114 @@
+Day 1
+
+Welcoming Everyone
+Introducing the speakers
+A video on Cyber Security & Warfare
+Introducing the Attendees
+Myth Busters (Video/Slide Demo)
+How much hackers earn in a year
+The World Through the Eyes of a Hacker (Reacon [Footprinting] , Reasearch, Exploit [Attack], Post exploit, Report, {if Whitehat}
+
+
+BREAK 10 MINUTES
+
+Penetration Testing Linux Distributions { Kali-Linux, Blackarch Linux, Parrot OS}
+
+Career Questions - 
+
+
+POLL QUESTION
+What is your familiarity with Ethical Hacking and Penetration Testing?
+a. Just started
+b. Intermediate (1-2 years of experience)
+c. Significant experience
+
+
+Assignment:
+
+Building Your
+Own Lab, and Setup
+
+Note: {You can deploy and configure your VMs using
+Virtual Box (Windows, Linux, Mac)
+VMWare Workstation Player (Windows)
+VMWare Workstation Pro (Windows)
+VMWare Fusion (Mac)
+vSphere Hypervisor (free ESXi server)
+}
+
+
+
+
+
+Day 2 - Foot Printing
+{DISCLAIMER /
+WARNING
+The information provided on this training is for
+educational purposes only. The author, O’Reilly, or
+any other entity is in no way responsible for any
+misuse of the information.
+Some of the tools and technologies that you will learn
+in this training class may be illegal depending on
+where you reside. Please check with your local laws.
+Please practice and use all the tools that are shown in
+this training in a lab that is not connected to the
+Internet or any other network.}
+
+
+Passive Reconnaissance
+Note { Demos
+    Google Hacking DB
+    Shodan
+    Recon NG
+    Maltego
+    SpiderFoot
+    Sublist3r
+    Buscador
+    }
+    
+
+Active Reconnaissance
+    {Netdiscover    
+     Nmap & Zenmap
+     OpenVAS
+     Commercial Scanners (Nessus)
+     }
+
+
+Social Engineering
+Introduction to Reasearch 
+
+
+Day 3
+
+Exploit-DB {Demo -}
+
+Paid for Resources {
+Buffer Overflows
+Introduction to Web Application Hacking
+Exploiting Cross-Site Scripting (XSS) Vulnerability 
+Cross-site Request Forgery (CSRF)
+Bypassing Authentication and Authorization
+Exploiting XXE Vulnerabilities
+Hacking Databases
+Post-Exploitation
+}
+
+
+Introduction to writing your own Tools
+    {python & Nmap
+     Bash
+     }
+
+PWNing the VMs: Exercises of Completely
+Compromising the RAVEN and VTSEC VMs
+
+Day 4
+
+-Forencis Methods
+-Policing the internet
+-Security Measures put in place on the internet
+-Job Opportunities for whitehat hackers
+
+
+
