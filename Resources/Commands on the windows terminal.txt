@@ -1,3 +1,6 @@
+The Commandline is the perfect environment to get things done, on windows we are offered CMD, and Windows powershell for our enjoyment. learn some of these commands as they are famous for gettiing things done
+
+
 In order to launch Win 10 Command Prompt, click on the Windows menu, then go in the Windows System folder and open Command Prompt. Please note that if you run the Command Prompt without administration rights, all Windows CMD commands typed inside it will be without rights as well. That’s nice to avoid problems while learning.
 
 Let’s start by displaying text with echo:
@@ -272,3 +275,8 @@ logman query "perf_log"
 The ftype commands are Windows System Commands. It represents or changes filetypes that are applied in file name extension assistance. If applied without an operator(=), ftype shows the prevailing open command string for the designated filetype. If applied without parameters, ftype shows the filetypes that have open strings specified. For example,
 
 ftype txtfile
+
+
+
+
+Cybermonk_J
